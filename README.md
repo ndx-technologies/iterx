@@ -1,1 +1,1 @@
-custom Go iterators
+extra iterators for Go
