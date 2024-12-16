@@ -1,10 +1,12 @@
-package iterx
+package iterx_test
 
 import (
 	"iter"
 	"slices"
 	"strconv"
 	"testing"
+
+	"github.com/ndx-technologies/iterx"
 )
 
 func TestMergeOrdered(t *testing.T) {
@@ -66,7 +68,7 @@ func TestMergeOrdered(t *testing.T) {
 			}
 
 			var merged []S
-			for q := range MergeOrdered(cmp, iters...) {
+			for q := range iterx.MergeOrdered(cmp, iters...) {
 				merged = append(merged, q)
 			}
 

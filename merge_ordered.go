@@ -1,15 +1,18 @@
 package iterx
 
-import (
-	"iter"
-)
+import "iter"
 
 func MergeOrdered[T any](cmp func(T, T) bool, iters ...iter.Seq[T]) iter.Seq[T] {
-	next := make([]func() (T, bool), len(iters))
-	stop := make([]func(), len(iters))
+	next := make([]func() (T, bool), 0, len(iters))
+	stop := make([]func(), 0, len(iters))
 
-	for i, it := range iters {
-		next[i], stop[i] = iter.Pull(it)
+	for _, i := range iters {
+		if i == nil {
+			continue
+		}
+		n, s := iter.Pull(i)
+		next = append(next, n)
+		stop = append(stop, s)
 	}
 
 	return func(yield func(T) bool) {
