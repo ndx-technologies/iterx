@@ -40,7 +40,7 @@ func TestMergeKV(t *testing.T) {
 				iters = append(iters, maps.All(m))
 			}
 
-			merged = maps.Collect(iterx.MergeKV(iters...))
+			merged := maps.Collect(iterx.MergeKV(iters...))
 
 			if !maps.Equal(merged, tc.e) {
 				t.Errorf("got %v, want %v", merged, tc.e)
